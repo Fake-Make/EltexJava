@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Phone-class
  *
  * @author Dmitry Nevada
- * @version 1.25.09.19
+ * @version 1.25.10.19
  */
 public class Phone extends Device {
     /** Array of available form types */

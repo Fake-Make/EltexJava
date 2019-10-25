@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Smartphone-class
  *
  * @author Dmitry Nevada
- * @version 1.25.09.19
+ * @version 1.25.10.19
  */
 public class Smartphone extends Device {
     /** Array of available sim types */
