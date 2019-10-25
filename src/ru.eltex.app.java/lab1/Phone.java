@@ -111,8 +111,8 @@ public class Phone extends Device {
         try {
             setFormType(scanner.nextLine());
         } catch (Exception e) {
-            System.out.println("You wrote wrong form type, so now form type is " + formTypes[formType]);
             formType = 0;
+            System.out.println("You wrote wrong form type, so now form type is " + formTypes[formType]);
         }
     }
 
