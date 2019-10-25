@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Phone-class
  *
  * @author Dmitry Nevada
- * @version 0.17.09.19
+ * @version 1.25.09.19
  */
 public class Phone extends Device {
     /** Array of available form types */
@@ -36,13 +36,23 @@ public class Phone extends Device {
     }
 
     /**
-     * Overloaded constructor with all possible fields
+     * Overloaded constructor with all possible fields where formType is int
      *
      * @throws Exception if price is lower than 0
      */
     public Phone(String name, String factory, String model, String os, double price, int formType) throws Exception {
         super(name, factory, model, os, price);
-        this.formType = formType;
+        setFormType(formType);
+    }
+
+    /**
+     * Overloaded constructor with all possible fields where formType is String
+     *
+     * @throws Exception if price is lower than 0
+     */
+    public Phone(String name, String factory, String model, String os, double price, String formType) throws Exception {
+        super(name, factory, model, os, price);
+        setFormType(formType);
     }
 
     /** @return Available form types as array */
@@ -71,8 +81,11 @@ public class Phone extends Device {
     /**
      * Set actual formType as index of array
      * @param formType index of formTypes array for actual formType
+     * @throws Exception if there is no such types in available types array
      */
-    public void setFormType(int formType) {
+    public void setFormType(int formType) throws Exception {
+        if (formType >= formTypes.length || formType < 0)
+            throw new Exception("Such form type is not available for phones!");
         this.formType = formType;
     }
 
@@ -81,7 +94,7 @@ public class Phone extends Device {
      * @param formType actual form type as String
      * @throws Exception if there is no such types in available types array
      */
-    public void setFormType(String formType)  throws Exception {
+    public void setFormType(String formType) throws Exception {
         if (!Arrays.asList(formTypes).contains(formType))
             throw new Exception("Such form type is not available for phones!");
         this.formType = Arrays.asList(formTypes).indexOf(formType);
