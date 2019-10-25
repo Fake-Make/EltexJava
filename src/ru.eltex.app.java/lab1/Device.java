@@ -1,5 +1,6 @@
 package ru.eltex.app.java.lab1;
 import java.util.Scanner;
+import java.util.UUID;
 
 /**
  * Abstract Device class
@@ -18,14 +19,16 @@ public abstract class Device implements ICrudAction {
     /** Device base price */
     protected double price;
     /** Device ID */
-    protected int id;
+    protected UUID id;
     /** Amount of defined devices */
     protected static int count;
     /** Flag to check if this object was deleted by its own method */
     protected boolean isDeleted = true;
 
     /** Default constructor with empty fields */
-    public Device() {}
+    public Device() {
+        id = UUID.randomUUID();
+    }
 
     /**
      * Overloaded constructor with tow main fields
@@ -37,6 +40,7 @@ public abstract class Device implements ICrudAction {
             throw new Exception("Device price can't be negative!");
         this.name = name;
         this.price = price;
+        id = UUID.randomUUID();
         switchDeletedFlag(false);
     }
 
@@ -53,6 +57,7 @@ public abstract class Device implements ICrudAction {
         this.model = model;
         this.os = os;
         this.price = price > 0 ? price : 0;
+        id = UUID.randomUUID();
         switchDeletedFlag(false);
     }
 
@@ -105,7 +110,7 @@ public abstract class Device implements ICrudAction {
         return price;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -167,7 +172,7 @@ public abstract class Device implements ICrudAction {
                 0.0 == price ? "Device is free or price is not defined;" : "Device price: " + price
         );
         System.out.println(
-                0 == id ? "Device ID is not defined;" : "Device ID: " + id
+                "Device ID: " + id
         );
         System.out.println(
                 0 == count ? "There is no devices;" :
@@ -204,7 +209,6 @@ public abstract class Device implements ICrudAction {
     public void delete() {
         name = factory = model = os = null;
         price = 0.0;
-        id = 0;
         switchDeletedFlag(true);
     };
 }
