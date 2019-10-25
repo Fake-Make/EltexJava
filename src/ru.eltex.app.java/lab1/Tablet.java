@@ -1,5 +1,7 @@
 package ru.eltex.app.java.lab1;
 
+import java.util.Scanner;
+
 /**
  * Smartphone-class
  *
@@ -76,5 +78,23 @@ public class Tablet extends Device {
 
     public void setScreenResolution(String screenResolution) {
         this.screenResolution = screenResolution;
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please enter device video chip name:");
+        setVideoChip(scanner.nextLine());
+        System.out.println("Please enter device's screen resolution:");
+        setScreenResolution(scanner.nextLine());
+    }
+
+    @Override
+    public void read() {
+        super.read();
+        System.out.println("Device video chip name: " + videoChip);
+        System.out.println("Device screen resolution: " + screenResolution);
     }
 }
