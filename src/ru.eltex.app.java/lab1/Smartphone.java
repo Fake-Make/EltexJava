@@ -1,6 +1,7 @@
 package ru.eltex.app.java.lab1;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * Smartphone-class
@@ -113,5 +114,34 @@ public class Smartphone extends Device {
         if (0 > simCount)
             throw new Exception("Amount of sim-cards can't be negative value!");
         this.simCount = simCount;
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please enter device sim type from available:");
+        System.out.println(simTypes.toString());
+        try {
+            setSimType(scanner.nextLine());
+        } catch (Exception e) {
+            simType = 0;
+            System.out.println("You wrote wrong sim type, so now sim type is " + simTypes[simType]);
+        }
+        System.out.println("Please enter device sim count:");
+        try {
+            setSimCount(Integer.parseInt(scanner.nextLine()));
+        } catch (Exception e) {
+            simCount = 1;
+            System.out.println("You wrote wrong sim-cards count, so now it's " + simCount);
+        }
+    }
+
+    @Override
+    public void read() {
+        super.read();
+        System.out.println("Device's sim type: " + simTypes[simType]);
+        System.out.println("Device's sim count: " + simCount);
     }
 }
