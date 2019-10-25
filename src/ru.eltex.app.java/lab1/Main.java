@@ -4,26 +4,25 @@ package ru.eltex.app.java.lab1;
  * Main class for launching first lab
  *
  * @author Dmitry Nevada
- * @version 0.17.09.19
+ * @version 1.26.10.19
  */
 public class Main {
     /**
      * Main user interface
      *
-     * @param args
+     * @param args int devicesAmount, String deviceType
      * @throws Exception if price is lower than 0
      * @throws Exception if simType or formType is incorrect
-     *
-     * @todo obj.create() && obj.read() in cycle
+     * @throws Exception if there is too few arguments
      */
     public static void main(String[] args) throws Exception {
         if (2 > args.length)
             throw new Exception("Too few arguments!");
-        int N = Integer.parseInt(args[0]);
+        int devicesAmount = Integer.parseInt(args[0]);
         String deviceType = args[1];
         Device obj;
 
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < devicesAmount; i++) {
             switch (deviceType) {
                 case "Phone":
                     obj = new Phone();
