@@ -107,7 +107,7 @@ public class Phone extends Device {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Please enter device form type from available:");
-        System.out.println(formTypes.toString());
+        System.out.println(Arrays.toString(formTypes));
         try {
             setFormType(scanner.nextLine());
         } catch (Exception e) {

@@ -122,7 +122,7 @@ public class Smartphone extends Device {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Please enter device sim type from available:");
-        System.out.println(simTypes.toString());
+        System.out.println(Arrays.toString(simTypes));
         try {
             setSimType(scanner.nextLine());
         } catch (Exception e) {
