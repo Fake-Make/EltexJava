@@ -1,5 +1,6 @@
 package ru.eltex.app.java.lab1;
 
+import java.util.Scanner;
 import java.util.Arrays;
 
 /**
@@ -98,5 +99,26 @@ public class Phone extends Device {
         if (!Arrays.asList(formTypes).contains(formType))
             throw new Exception("Such form type is not available for phones!");
         this.formType = Arrays.asList(formTypes).indexOf(formType);
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please enter device form type from available:");
+        System.out.println(formTypes.toString());
+        try {
+            setFormType(scanner.nextLine());
+        } catch (Exception e) {
+            System.out.println("You wrote wrong form type, so now form type is " + formTypes[formType]);
+            formType = 0;
+        }
+    }
+
+    @Override
+    public void read() {
+        super.read();
+        System.out.println("Device's form type: " + formTypes[formType]);
     }
 }
