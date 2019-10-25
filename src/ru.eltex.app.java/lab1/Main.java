@@ -5,10 +5,19 @@ package ru.eltex.app.java.lab1;
  *
  * @author Dmitry Nevada
  * @version 0.17.09.19
- *
- * @throws Exception if price is lower than 0
  */
 public class Main {
+    /**
+     * Main user interface
+     *
+     * @param args
+     * @throws Exception if price is lower than 0
+     * @throws Exception if simType or formType is incorrect
+     *
+     * @todo TYPE and AMOUNT from args
+     * @todo Device obj = new TYPE();
+     * @todo obj.create() && obj.read() in cycle
+     */
     public static void main(String[] args) throws Exception {
         //Device gadget = new Phone("Heighscreen", 12.3);
         Device gadget = new Phone();
