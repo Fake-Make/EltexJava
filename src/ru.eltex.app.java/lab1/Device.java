@@ -197,8 +197,10 @@ public abstract class Device implements ICrudAction {
         System.out.println("Please enter device price:");
         price = Double.parseDouble(scanner.nextLine());
 
-        if (0 > price)
+        if (0 > price) {
+            System.out.println("You wrote wrong price, so now price = .0");
             price = 0.0;
+        }
 
         switchDeletedFlag(false);
     };
