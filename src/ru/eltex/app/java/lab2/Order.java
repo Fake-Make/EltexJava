@@ -4,11 +4,24 @@ import ru.eltex.app.java.lab1.Device;
 import ru.eltex.app.java.lab1.ICrudAction;
 import java.util.Scanner;
 
+/**
+ * Device class
+ *
+ * @author Dmitry Nevada
+ * @version 0.18.11.19
+ */
 public class Order implements ICrudAction {
+    /** Ordered item */
     protected Device item;
+    /** Customer */
     protected Credentials customer;
+    /** Order status (Waiting | Processed) */
     //protected enum status {};
 
+    /** Default constructor with no params */
+    public Order() {}
+
+    /** Overloaded constructor with item and customer as Params */
     public Order(Device item, Credentials customer) {
         this.item = item;
         this.customer = customer;
