@@ -15,22 +15,28 @@ public class Order implements ICrudAction {
     protected Device item;
     /** Customer */
     protected Credentials customer;
-    /** Order status (Waiting | Processed) */
-    //protected enum status {};
+    /** Order status enum */
+    protected enum Status { WAITING, PROCESSED };
+    /** Order status enum value */
+    protected Status status;
 
     /** Default constructor with no params */
-    public Order() {}
+    public Order() {
+        status = Status.WAITING;
+    }
 
     /** Overloaded constructor with item and customer as Params */
     public Order(Device item, Credentials customer) {
         this.item = item;
         this.customer = customer;
+        status = Status.WAITING;
     }
 
     @Override
     public void create() {
         item.create();
         customer.create();
+        status = Status.WAITING;
     }
 
     @Override
@@ -39,12 +45,60 @@ public class Order implements ICrudAction {
         item.read();
         System.out.println("Customer:");
         customer.read();
+        System.out.println("Order status: " + status.toString());
+    }
+
+    public Device getItem() {
+        return item;
+    }
+
+    public Credentials getCustomer() {
+        return customer;
+    }
+
+    public void setItem(Device item) {
+        this.item = item;
+    }
+
+    public void setCustomer(Credentials customer) {
+        this.customer = customer;
+    }
+
+    public int setStatus(String status) {
+        try {
+            this.status = Status.valueOf(status.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            this.status = Status.WAITING;
+            return 1;
+        } catch (NullPointerException e) {
+            this.status = Status.WAITING;
+            return 2;
+        }
+        return 0;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     @Override
     public void update() {
+        Scanner scanner = new Scanner(System.in);
+
         item.update();
         customer.update();
+
+        System.out.println("Please enter order status:");
+        switch (setStatus(scanner.nextLine())) {
+            case 1:
+                System.out.println("There is no such status;");
+                System.out.println("Order status is " + status.toString() + " by default;");
+                break;
+            case 2:
+                System.out.println("Entered status is empty;");
+                System.out.println("Order status is " + status.toString() + " by default;");
+                break;
+        }
     }
 
     @Override
