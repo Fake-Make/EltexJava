@@ -18,22 +18,28 @@ public class Order implements ICrudAction {
     /** Customer */
     protected Credentials customer;
     /** Order status enum */
-    protected enum Status { WAITING, PROCESSED };
+    protected enum Status {AWAITING, PROCESSED };
     /** Order status enum value */
     protected Status status;
     /** Creating order date */
-    Date createTime;
+    protected Date createTime;
+
+    /** Bad solution? */
+    /** Amount of milliseconds in one day */
+    private long msInDay = 24 * 60 * 60 * 1000;
+    /** Awaiting time limit in milliseconds */
+    protected final long awaitingTimeLimit = msInDay * 3;
 
     /** Default constructor with no params */
     public Order() {
-        status = Status.WAITING;
+        status = Status.AWAITING;
     }
 
     /** Overloaded constructor with item and customer as Params */
     public Order(Device item, Credentials customer) {
         this.item = item;
         this.customer = customer;
-        status = Status.WAITING;
+        status = Status.AWAITING;
         createTime = new Date();
     }
 
@@ -41,7 +47,7 @@ public class Order implements ICrudAction {
     public void create() {
         item.create();
         customer.create();
-        status = Status.WAITING;
+        status = Status.AWAITING;
         createTime = new Date();
     }
 
@@ -75,10 +81,10 @@ public class Order implements ICrudAction {
         try {
             this.status = Status.valueOf(status.toUpperCase());
         } catch (IllegalArgumentException e) {
-            this.status = Status.WAITING;
+            this.status = Status.AWAITING;
             return 1;
         } catch (NullPointerException e) {
-            this.status = Status.WAITING;
+            this.status = Status.AWAITING;
             return 2;
         }
         return 0;
