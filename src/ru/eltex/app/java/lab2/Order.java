@@ -5,7 +5,7 @@ import ru.eltex.app.java.lab1.ICrudAction;
 import java.util.Scanner;
 
 /**
- * Device class
+ * Order class
  *
  * @author Dmitry Nevada
  * @version 0.18.11.19

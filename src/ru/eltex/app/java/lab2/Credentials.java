@@ -4,17 +4,28 @@ import ru.eltex.app.java.lab1.ICrudAction;
 import java.util.Scanner;
 import java.util.UUID;
 
+/**
+ * Credentials class
+ *
+ * @author Dmitry Nevada
+ * @version 0.09.11.19
+ */
 public class Credentials implements ICrudAction {
+    /** Person ID */
     private UUID id;
+    /** Person properties */
     private String firstName, surName, secondName, email;
 
+    /** Default constructor */
     public Credentials() {}
 
+    /** Overloaded constructor with basic params: First Name and E-mail */
     public Credentials(String firstName, String email) {
         this.firstName = firstName;
         this.email = email;
     }
 
+    /** Overloaded constructor with all possible params */
     public Credentials(String firstName, String surName, String secondName, String email) {
         this.firstName = firstName;
         this.surName = surName;
