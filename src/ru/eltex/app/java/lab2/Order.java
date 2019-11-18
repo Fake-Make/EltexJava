@@ -2,6 +2,8 @@ package ru.eltex.app.java.lab2;
 
 import ru.eltex.app.java.lab1.Device;
 import ru.eltex.app.java.lab1.ICrudAction;
+
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -19,6 +21,8 @@ public class Order implements ICrudAction {
     protected enum Status { WAITING, PROCESSED };
     /** Order status enum value */
     protected Status status;
+    /** Creating order date */
+    Date createTime;
 
     /** Default constructor with no params */
     public Order() {
@@ -30,6 +34,7 @@ public class Order implements ICrudAction {
         this.item = item;
         this.customer = customer;
         status = Status.WAITING;
+        createTime = new Date();
     }
 
     @Override
@@ -37,6 +42,7 @@ public class Order implements ICrudAction {
         item.create();
         customer.create();
         status = Status.WAITING;
+        createTime = new Date();
     }
 
     @Override
@@ -46,6 +52,7 @@ public class Order implements ICrudAction {
         System.out.println("Customer:");
         customer.read();
         System.out.println("Order status: " + status.toString());
+        System.out.println("Order created " + createTime.toString());
     }
 
     public Device getItem() {
@@ -99,11 +106,15 @@ public class Order implements ICrudAction {
                 System.out.println("Order status is " + status.toString() + " by default;");
                 break;
         }
+
+        createTime.setTime(System.currentTimeMillis());
     }
 
     @Override
     public void delete() {
         item.delete();
         customer.delete();
+        status = null;
+        createTime = null;
     }
 }
