@@ -62,6 +62,40 @@ public class Order implements ICrudAction {
         System.out.println("Order created " + createTime.getTime());
     }
 
+    @Override
+    public void update() {
+        Scanner scanner = new Scanner(System.in);
+
+        //cart.update();
+        customer.update();
+
+        System.out.println("Please enter order status:");
+        switch (setStatus(scanner.nextLine())) {
+            case 1:
+                System.out.println("There is no such status;");
+                System.out.println("Order status is " + status.toString() + " by default;");
+                break;
+            case 2:
+                System.out.println("Entered status is empty;");
+                System.out.println("Order status is " + status.toString() + " by default;");
+                break;
+        }
+
+        createTime.setTime(new Date());
+    }
+
+    @Override
+    public void delete() {
+        //cart.delete();
+        customer.delete();
+        status = null;
+        createTime = null;
+    }
+
+    public boolean isExpired() {
+        return createTime.getTime().getTime() + awaitingTimeLimit <= System.currentTimeMillis();
+    }
+
     public ShoppingCart getCart() {
         return cart;
     }
@@ -93,35 +127,5 @@ public class Order implements ICrudAction {
 
     public Status getStatus() {
         return status;
-    }
-
-    @Override
-    public void update() {
-        Scanner scanner = new Scanner(System.in);
-
-        //cart.update();
-        customer.update();
-
-        System.out.println("Please enter order status:");
-        switch (setStatus(scanner.nextLine())) {
-            case 1:
-                System.out.println("There is no such status;");
-                System.out.println("Order status is " + status.toString() + " by default;");
-                break;
-            case 2:
-                System.out.println("Entered status is empty;");
-                System.out.println("Order status is " + status.toString() + " by default;");
-                break;
-        }
-
-        createTime.setTime(new Date());
-    }
-
-    @Override
-    public void delete() {
-        //cart.delete();
-        customer.delete();
-        status = null;
-        createTime = null;
     }
 }
