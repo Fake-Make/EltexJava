@@ -52,14 +52,14 @@ public class Orders {
     }
 
     /**
-     * Removing all orders with expired processing time
+     * Removing all processed orders with expired awaiting time
      *
      * @returns amount of removed orders
      */
     public int removeExpiredElements() {
         int wasRemoved = 0;
         for (Order order : ordersList) {
-            if (order.isExpired()) {
+            if (order.isExpired() && order.isProcessed()) {
                 this.remove(order);
                 wasRemoved++;
             }
