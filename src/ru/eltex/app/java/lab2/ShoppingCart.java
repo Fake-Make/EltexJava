@@ -8,7 +8,7 @@ import java.util.LinkedList;
  * ShoppingCart class
  *
  * @author Dmitry Nevada
- * @version 0.11.19.19
+ * @version 1.19.11.19
  */
 public class ShoppingCart {
     /** Basic container for Device-typed objects */

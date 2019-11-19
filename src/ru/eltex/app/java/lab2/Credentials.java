@@ -8,7 +8,7 @@ import java.util.UUID;
  * Credentials class
  *
  * @author Dmitry Nevada
- * @version 1.11.09.19
+ * @version 1.09.11.19
  */
 public class Credentials implements ICrudAction {
     /** Person ID */
