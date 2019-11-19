@@ -3,14 +3,16 @@ package ru.eltex.app.java.lab2;
 import ru.eltex.app.java.lab1.Device;
 import ru.eltex.app.java.lab1.ICrudAction;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /**
  * Order class
  *
  * @author Dmitry Nevada
- * @version 0.18.11.19
+ * @version 1.19.11.19
  */
 public class Order implements ICrudAction {
     /** Ordered item */
@@ -22,13 +24,12 @@ public class Order implements ICrudAction {
     /** Order status enum value */
     protected Status status;
     /** Creating order date */
-    protected Date createTime;
+    protected Calendar createTime;
 
-    /** Bad solution? */
-    /** Amount of milliseconds in one day */
-    private long msInDay = 24 * 60 * 60 * 1000;
+    /** Amount of milliseconds in one hour */
+    protected final long msInHour = 60 * 60 * 1000;
     /** Awaiting time limit in milliseconds */
-    protected final long awaitingTimeLimit = msInDay * 3;
+    protected long awaitingTimeLimit = msInHour * 24 * 3;
 
     /** Default constructor with no params */
     public Order() {
@@ -40,7 +41,7 @@ public class Order implements ICrudAction {
         this.item = item;
         this.customer = customer;
         status = Status.AWAITING;
-        createTime = new Date();
+        createTime = new GregorianCalendar();
     }
 
     @Override
@@ -48,7 +49,7 @@ public class Order implements ICrudAction {
         item.create();
         customer.create();
         status = Status.AWAITING;
-        createTime = new Date();
+        createTime = new GregorianCalendar();
     }
 
     @Override
@@ -58,7 +59,7 @@ public class Order implements ICrudAction {
         System.out.println("Customer:");
         customer.read();
         System.out.println("Order status: " + status.toString());
-        System.out.println("Order created " + createTime.toString());
+        System.out.println("Order created " + createTime.getTime());
     }
 
     public Device getItem() {
@@ -113,7 +114,7 @@ public class Order implements ICrudAction {
                 break;
         }
 
-        createTime.setTime(System.currentTimeMillis());
+        createTime.setTime(new Date());
     }
 
     @Override
