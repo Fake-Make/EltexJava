@@ -50,4 +50,20 @@ public class Orders {
     public void makePurchase(ShoppingCart cart, Credentials person) {
         ordersList.add(new Order(cart, person));
     }
+
+    /**
+     * Removing all orders with expired processing time
+     *
+     * @returns amount of removed orders
+     */
+    public int removeExpiredElements() {
+        int wasRemoved = 0;
+        for (Order order : ordersList) {
+            if (order.isExpired()) {
+                this.remove(order);
+                wasRemoved++;
+            }
+        }
+        return wasRemoved;
+    }
 }
