@@ -92,8 +92,22 @@ public class Order implements ICrudAction {
         createTime = null;
     }
 
+    /**
+     * Check order's awaiting time for expiring
+     *
+     * @return true if order's awaiting time is expired
+     */
     public boolean isExpired() {
         return createTime.getTime().getTime() + awaitingTimeLimit <= System.currentTimeMillis();
+    }
+
+    /**
+     * Check order status for processing
+     *
+     * @return true if status is PROCESSED
+     */
+    public boolean isProcessed() {
+        return status == Status.PROCESSED;
     }
 
     public ShoppingCart getCart() {
