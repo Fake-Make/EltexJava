@@ -12,11 +12,11 @@ import java.util.LinkedList;
  */
 public class ShoppingCart {
     /** Basic container for Device-typed objects */
-    protected LinkedList<Device> cart;
+    protected LinkedList<Device> cartList;
 
     /** Default constructor */
     public ShoppingCart() {
-        cart = new LinkedList<>();
+        cartList = new LinkedList<>();
     }
 
     /**
@@ -25,7 +25,7 @@ public class ShoppingCart {
      * @param item Object of Device-type
      */
     public void add(Device item) {
-        cart.add(item);
+        cartList.add(item);
     }
 
     /**
@@ -34,10 +34,10 @@ public class ShoppingCart {
      * @param item Object of Device-type
      */
     public int delete(Device item) {
-        int index = cart.indexOf(item);
+        int index = cartList.indexOf(item);
         if (-1 == index)
             return 1;
-        cart.remove(index);
+        cartList.remove(index);
         return 0;
     }
 }
