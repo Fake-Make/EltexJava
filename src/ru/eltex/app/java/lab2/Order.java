@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 /**
  * Order class
+ * TODO: Develop CRUD-Methods for ShoppingCart class
  *
  * @author Dmitry Nevada
  * @version 1.19.11.19
