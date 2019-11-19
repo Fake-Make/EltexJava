@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Orders {
     /** Basic container for Device-typed objects */
-    protected ArrayList<Device> ordersList;
+    protected ArrayList<Order> ordersList;
 
     /** Default constructor */
     public Orders() {
@@ -22,19 +22,19 @@ public class Orders {
     /**
      * Adding new item to orders list
      *
-     * @param item Object of Device-type
+     * @param order Object of Device-type
      */
-    public void add(Device item) {
-        ordersList.add(item);
+    public void add(Order order) {
+        ordersList.add(order);
     }
 
     /**
      * Removing item from orders list
      *
-     * @param item Object of Device-type
+     * @param order Object of Device-type
      */
-    public int remove(Device item) {
-        int index = ordersList.indexOf(item);
+    public int remove(Order order) {
+        int index = ordersList.indexOf(order);
         if (-1 == index)
             return 1;
         ordersList.remove(index);
