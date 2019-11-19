@@ -1,6 +1,5 @@
 package ru.eltex.app.java.lab2;
 
-import ru.eltex.app.java.lab1.Device;
 import ru.eltex.app.java.lab1.ICrudAction;
 
 import java.util.Calendar;
@@ -15,8 +14,8 @@ import java.util.Scanner;
  * @version 1.19.11.19
  */
 public class Order implements ICrudAction {
-    /** Ordered item */
-    protected Device item;
+    /** Cart of ordered items */
+    protected ShoppingCart cart;
     /** Customer */
     protected Credentials customer;
     /** Order status enum */
@@ -36,9 +35,9 @@ public class Order implements ICrudAction {
         status = Status.AWAITING;
     }
 
-    /** Overloaded constructor with item and customer as Params */
-    public Order(Device item, Credentials customer) {
-        this.item = item;
+    /** Overloaded constructor with cart and customer as Params */
+    public Order(ShoppingCart cart, Credentials customer) {
+        this.cart = cart;
         this.customer = customer;
         status = Status.AWAITING;
         createTime = new GregorianCalendar();
@@ -46,7 +45,7 @@ public class Order implements ICrudAction {
 
     @Override
     public void create() {
-        item.create();
+        //cart.create();
         customer.create();
         status = Status.AWAITING;
         createTime = new GregorianCalendar();
@@ -54,24 +53,24 @@ public class Order implements ICrudAction {
 
     @Override
     public void read() {
-        System.out.println("Ordered item:");
-        item.read();
+        System.out.println("Shopping cart:");
+        //cart.read();
         System.out.println("Customer:");
         customer.read();
         System.out.println("Order status: " + status.toString());
         System.out.println("Order created " + createTime.getTime());
     }
 
-    public Device getItem() {
-        return item;
+    public ShoppingCart getCart() {
+        return cart;
     }
 
     public Credentials getCustomer() {
         return customer;
     }
 
-    public void setItem(Device item) {
-        this.item = item;
+    public void setCart(ShoppingCart cart) {
+        this.cart = cart;
     }
 
     public void setCustomer(Credentials customer) {
@@ -99,7 +98,7 @@ public class Order implements ICrudAction {
     public void update() {
         Scanner scanner = new Scanner(System.in);
 
-        item.update();
+        //cart.update();
         customer.update();
 
         System.out.println("Please enter order status:");
@@ -119,7 +118,7 @@ public class Order implements ICrudAction {
 
     @Override
     public void delete() {
-        item.delete();
+        //cart.delete();
         customer.delete();
         status = null;
         createTime = null;
