@@ -40,4 +40,14 @@ public class Orders {
         ordersList.remove(index);
         return 0;
     }
+
+    /**
+     * Creating order and pushing it to container
+     *
+     * @param cart ShoppingCart-typed object for creating order
+     * @param person Credentials-typed object for creating order
+     */
+    public void makePurchase(ShoppingCart cart, Credentials person) {
+        ordersList.add(new Order(cart, person));
+    }
 }
