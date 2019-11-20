@@ -41,7 +41,9 @@ public class ShoppingCart {
         return 0;
     }
 
-    public void read() {
+    /** Show all items from cart */
+    public void showAll() {
+        System.out.println("Shopping cart items:");
         for (Device item : cartList) {
             item.read();
         }
