@@ -2,10 +2,7 @@ package ru.eltex.app.java.lab2;
 
 import ru.eltex.app.java.lab1.ICrudAction;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Order class
@@ -26,6 +23,8 @@ public class Order implements ICrudAction {
     /** Creating order date */
     protected Calendar createTime;
 
+    protected UUID id;
+
     /** Amount of milliseconds in one hour */
     protected final long msInHour = 60 * 60 * 1000;
     /** Awaiting time limit in milliseconds */
@@ -34,12 +33,14 @@ public class Order implements ICrudAction {
     /** Default constructor with no params */
     public Order() {
         status = Status.AWAITING;
+        id = UUID.randomUUID();
     }
 
     /** Overloaded constructor with cart and customer as Params */
     public Order(ShoppingCart cart, Credentials customer) {
         this.cart = cart;
         this.customer = customer;
+        id = UUID.randomUUID();
         status = Status.AWAITING;
         createTime = new GregorianCalendar();
     }
@@ -54,12 +55,13 @@ public class Order implements ICrudAction {
 
     @Override
     public void read() {
+        System.out.println("Order ID:" + id);
+        System.out.println("Order status: " + status.toString());
+        System.out.println("Order created " + createTime.getTime());
         System.out.println("Shopping cart:");
         cart.showAll();
         System.out.println("Customer:");
         customer.read();
-        System.out.println("Order status: " + status.toString());
-        System.out.println("Order created " + createTime.getTime());
     }
 
     @Override
