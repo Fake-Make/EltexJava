@@ -40,4 +40,10 @@ public class ShoppingCart {
         cartList.remove(index);
         return 0;
     }
+
+    public void read() {
+        for (Device item : cartList) {
+            item.read();
+        }
+    }
 }
