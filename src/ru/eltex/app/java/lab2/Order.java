@@ -55,7 +55,7 @@ public class Order implements ICrudAction {
     @Override
     public void read() {
         System.out.println("Shopping cart:");
-        //cart.read();
+        cart.read();
         System.out.println("Customer:");
         customer.read();
         System.out.println("Order status: " + status.toString());
