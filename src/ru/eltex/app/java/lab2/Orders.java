@@ -67,5 +67,10 @@ public class Orders {
         return wasRemoved;
     }
 
-    //public void showAllOrders
+    /** Show all orders and their information */
+    public void showAllOrders() {
+        for (Order order : ordersList) {
+            order.read();
+        }
+    }
 }
