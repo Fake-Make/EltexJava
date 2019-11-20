@@ -43,7 +43,6 @@ public class ShoppingCart {
 
     /** Show all items from cart */
     public void showAll() {
-        System.out.println("Shopping cart items:");
         for (Device item : cartList) {
             item.read();
         }
