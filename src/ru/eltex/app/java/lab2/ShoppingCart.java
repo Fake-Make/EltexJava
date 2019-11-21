@@ -56,6 +56,16 @@ public class ShoppingCart {
         }
     }
 
+    public Device searchById(UUID id) {
+        if (!devicesIds.contains(id))
+            return null;
+        for (Device item : cartList) {
+            if (id == item.getId())
+                return item;
+        }
+        return null;
+    }
+
     public LinkedList<Device> getCartList() {
         return cartList;
     }
