@@ -2,6 +2,8 @@ package ru.eltex.app.java.lab2;
 
 import ru.eltex.app.java.lab1.Device;
 import ru.eltex.app.java.lab1.Phone;
+import ru.eltex.app.java.lab1.Smartphone;
+import ru.eltex.app.java.lab1.Tablet;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +12,13 @@ import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) {
+        if (2 > args.length) {
+            System.out.println("Too few arguments!");
+            return;
+        }
+        int devicesAmount = Integer.parseInt(args[0]);
+        String deviceType = args[1];
+
         /** create two persons */
         Credentials personOne = new Credentials("Ivan", "Ivanovich", "Ivanov", "mail@mail.ru");
         Credentials personTwo = new Credentials();
@@ -17,8 +26,18 @@ public class Main {
 
         /** create five devices */
         ArrayList<Device> devices = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Device device = new Phone();
+        for (int i = 0; i < devicesAmount; i++) {
+            Device device;
+            switch (deviceType) {
+                case "Phone":
+                    device = new Phone();
+                    break;
+                case "Smartphone":
+                    device = new Smartphone();
+                    break;
+                default:
+                    device = new Tablet();
+            }
             device.create();
             devices.add(device);
         }
