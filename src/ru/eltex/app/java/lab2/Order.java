@@ -20,6 +20,11 @@ public class Order implements ICrudAction {
     protected enum Status {AWAITING, PROCESSED };
     /** Order status enum value */
     protected Status status;
+
+    public Calendar getCreateTime() {
+        return createTime;
+    }
+
     /** Creating order date */
     protected Calendar createTime;
 
