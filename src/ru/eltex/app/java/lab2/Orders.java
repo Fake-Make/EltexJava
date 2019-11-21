@@ -2,7 +2,10 @@ package ru.eltex.app.java.lab2;
 
 import ru.eltex.app.java.lab1.Device;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TreeMap;
 
 /**
  * ShoppingCart class
@@ -13,10 +16,13 @@ import java.util.ArrayList;
 public class Orders {
     /** Basic container for Order-typed objects */
     protected ArrayList<Order> ordersList;
+    /** Secondary container for Order-typed objects by their creating time */
+    protected AbstractMap<Calendar, Order> ordersListByCreateTime;
 
     /** Default constructor */
     public Orders() {
         ordersList = new ArrayList<>();
+        ordersListByCreateTime = new TreeMap<>();
     }
 
     /**
@@ -26,6 +32,7 @@ public class Orders {
      */
     public void add(Order order) {
         ordersList.add(order);
+        ordersListByCreateTime.put(order.getCreateTime(), order);
     }
 
     /**
@@ -34,6 +41,7 @@ public class Orders {
      * @param order Object of Device-type
      */
     public int remove(Order order) {
+        ordersListByCreateTime.remove(order.getCreateTime());
         int index = ordersList.indexOf(order);
         if (-1 == index)
             return 1;
@@ -48,7 +56,7 @@ public class Orders {
      * @param person Credentials-typed object for creating order
      */
     public void makePurchase(ShoppingCart cart, Credentials person) {
-        ordersList.add(new Order(cart, person));
+        this.add(new Order(cart, person));
     }
 
     /**
