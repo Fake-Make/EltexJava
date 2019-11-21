@@ -71,16 +71,30 @@ public class Main {
         System.out.println("Orders:");
         orders.showAllOrders();
 
+
+        System.out.println();
+        System.out.println();
+        System.out.println("First basket:");
+        basketOne.showAll();
+        System.out.println();
+
         /** deleting item from cart */
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter ID to delete this item from first cart:");
         /** also searching item by id */
-        if (-1 == basketOne.delete(basketOne.searchById(UUID.fromString(scanner.nextLine())))) {
-            System.out.println("There wasn't such item");
+        UUID searchId = UUID.fromString(scanner.nextLine());
+        System.out.println("UUID from string is " + searchId);
+        Device foundItem = basketOne.searchById(searchId);
+        if (foundItem == null) {
+            System.out.println("I can't find it");
         } else {
-            /** and displaying that */
-            System.out.println("Now first basket looks like this:");
-            basketOne.showAll();
+            if (1 == basketOne.delete(foundItem)) {
+                System.out.println("There wasn't such item");
+            } else {
+                /** and displaying that */
+                System.out.println("Now first basket looks like this:");
+                basketOne.showAll();
+            }
         }
     }
 }
