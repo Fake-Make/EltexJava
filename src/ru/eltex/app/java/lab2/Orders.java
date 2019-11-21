@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @version 1.19.11.19
  */
 public class Orders {
-    /** Basic container for Device-typed objects */
+    /** Basic container for Order-typed objects */
     protected ArrayList<Order> ordersList;
 
     /** Default constructor */
