@@ -60,7 +60,7 @@ public class ShoppingCart {
         if (!devicesIds.contains(id))
             return null;
         for (Device item : cartList) {
-            if (id == item.getId())
+            if (id.equals(item.getId()))
                 return item;
         }
         return null;
