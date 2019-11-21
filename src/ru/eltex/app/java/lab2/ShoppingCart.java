@@ -2,7 +2,9 @@ package ru.eltex.app.java.lab2;
 
 import ru.eltex.app.java.lab1.Device;
 
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.UUID;
 
 /**
  * ShoppingCart class
@@ -13,10 +15,13 @@ import java.util.LinkedList;
 public class ShoppingCart {
     /** Basic container for Device-typed objects */
     protected LinkedList<Device> cartList;
+    /** Additional container for device-items' IDs */
+    protected HashSet<UUID> devicesIds;
 
     /** Default constructor */
     public ShoppingCart() {
         cartList = new LinkedList<>();
+        devicesIds = new HashSet<>();
     }
 
     /**
@@ -26,6 +31,7 @@ public class ShoppingCart {
      */
     public void add(Device item) {
         cartList.add(item);
+        devicesIds.add(item.getId());
     }
 
     /**
@@ -34,10 +40,12 @@ public class ShoppingCart {
      * @param item Object of Device-type
      */
     public int delete(Device item) {
+        /** TODO: Rebuild method using HashSet */
         int index = cartList.indexOf(item);
         if (-1 == index)
             return 1;
         cartList.remove(index);
+        devicesIds.remove(item.getId());
         return 0;
     }
 
