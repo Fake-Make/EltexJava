@@ -47,4 +47,8 @@ public class ShoppingCart {
             item.read();
         }
     }
+
+    public LinkedList<Device> getCartList() {
+        return cartList;
+    }
 }
