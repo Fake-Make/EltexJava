@@ -8,7 +8,7 @@ import java.util.UUID;
  * Credentials class
  *
  * @author Dmitry Nevada
- * @version 1.09.11.19
+ * @version 1.21.11.19
  */
 public class Credentials implements ICrudAction {
     /** Person ID */
@@ -17,16 +17,20 @@ public class Credentials implements ICrudAction {
     private String firstName, surName, secondName, email;
 
     /** Default constructor */
-    public Credentials() {}
+    public Credentials() {
+        id = UUID.randomUUID();
+    }
 
     /** Overloaded constructor with basic params: First Name and E-mail */
     public Credentials(String firstName, String email) {
+        id = UUID.randomUUID();
         this.firstName = firstName;
         this.email = email;
     }
 
     /** Overloaded constructor with all possible params */
     public Credentials(String firstName, String surName, String secondName, String email) {
+        id = UUID.randomUUID();
         this.firstName = firstName;
         this.surName = surName;
         this.secondName = secondName;
