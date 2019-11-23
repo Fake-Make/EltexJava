@@ -50,6 +50,10 @@ public class Order implements ICrudAction {
         createTime = new GregorianCalendar();
     }
 
+    public static Order makePurchase(ShoppingCart cart, Credentials customer) {
+        return new Order(cart, customer);
+    }
+
     @Override
     public void create() {
         //cart.create();
