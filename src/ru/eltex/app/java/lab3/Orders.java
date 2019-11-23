@@ -1,9 +1,6 @@
 package ru.eltex.app.java.lab3;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * ShoppingCart class
@@ -11,11 +8,11 @@ import java.util.TreeMap;
  * @author Dmitry Nevada
  * @version 1.19.11.19
  */
-public class Orders {
+public class Orders<T extends Order> {
     /** Basic container for Order-typed objects */
-    protected ArrayList<Order> ordersList;
+    protected List<T> ordersList;
     /** Secondary container for Order-typed objects by their creating time */
-    protected AbstractMap<Calendar, Order> ordersListByCreateTime;
+    protected Map<Calendar, T> ordersListByCreateTime;
 
     /** Default constructor */
     public Orders() {
@@ -26,9 +23,9 @@ public class Orders {
     /**
      * Adding new item to orders list
      *
-     * @param order Object of Device-type
+     * @param order Object of Order-type
      */
-    public void add(Order order) {
+    public void add(T order) {
         ordersList.add(order);
         ordersListByCreateTime.put(order.getCreateTime(), order);
     }
@@ -36,9 +33,9 @@ public class Orders {
     /**
      * Removing item from orders list
      *
-     * @param order Object of Device-type
+     * @param order Object of Order-type
      */
-    public int remove(Order order) {
+    public int remove(T order) {
         ordersListByCreateTime.remove(order.getCreateTime());
         int index = ordersList.indexOf(order);
         if (-1 == index)
@@ -54,7 +51,7 @@ public class Orders {
      * @param person Credentials-typed object for creating order
      */
     public void makePurchase(ShoppingCart cart, Credentials person) {
-        this.add(new Order(cart, person));
+        this.add((T) T.makePurchase(cart, person));
     }
 
     /**
@@ -64,7 +61,7 @@ public class Orders {
      */
     public int removeExpiredElements() {
         int wasRemoved = 0;
-        for (Order order : ordersList) {
+        for (T order : ordersList) {
             if (order.isExpired() && order.isProcessed()) {
                 this.remove(order);
                 wasRemoved++;
@@ -75,7 +72,7 @@ public class Orders {
 
     /** Show all orders and their information */
     public void showAllOrders() {
-        for (Order order : ordersList) {
+        for (T order : ordersList) {
             order.read();
         }
     }
