@@ -2,21 +2,19 @@ package ru.eltex.app.java.lab3;
 
 import ru.eltex.app.java.lab1.Device;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * ShoppingCart class
  *
  * @author Dmitry Nevada
- * @version 1.19.11.19
+ * @version 1.23.11.19
  */
-public class ShoppingCart {
+public class ShoppingCart<T extends Device> {
     /** Basic container for Device-typed objects */
-    protected LinkedList<Device> cartList;
+    protected List<T> cartList;
     /** Additional container for device-items' IDs */
-    protected HashSet<UUID> devicesIds;
+    protected Set<UUID> devicesIds;
 
     /** Default constructor */
     public ShoppingCart() {
@@ -29,7 +27,7 @@ public class ShoppingCart {
      *
      * @param item Object of Device-type
      */
-    public void add(Device item) {
+    public void add(T item) {
         cartList.add(item);
         devicesIds.add(item.getId());
     }
@@ -39,7 +37,7 @@ public class ShoppingCart {
      *
      * @param item Object of Device-type
      */
-    public int delete(Device item) {
+    public int delete(T item) {
         /** TODO: Rebuild method using HashSet */
         int index = cartList.indexOf(item);
         if (-1 == index)
@@ -51,22 +49,22 @@ public class ShoppingCart {
 
     /** Show all items from cart */
     public void showAll() {
-        for (Device item : cartList) {
+        for (T item : cartList) {
             item.read();
         }
     }
 
-    public Device searchById(UUID id) {
+    public T searchById(UUID id) {
         if (!devicesIds.contains(id))
             return null;
-        for (Device item : cartList) {
+        for (T item : cartList) {
             if (id.equals(item.getId()))
                 return item;
         }
         return null;
     }
 
-    public LinkedList<Device> getCartList() {
+    public List<T> getCartList() {
         return cartList;
     }
 }
