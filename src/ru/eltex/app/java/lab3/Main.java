@@ -6,6 +6,7 @@ import ru.eltex.app.java.lab1.Smartphone;
 import ru.eltex.app.java.lab1.Tablet;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public class Main {
         personTwo.create();
 
         /** create five devices */
-        ArrayList<Device> devices = new ArrayList<>();
+        List<Device> devices = new ArrayList<>();
         for (int i = 0; i < devicesAmount; i++) {
             Device device;
             switch (deviceType) {
@@ -42,8 +43,8 @@ public class Main {
         }
 
         /** create two baskets */
-        ShoppingCart basketOne = new ShoppingCart();
-        ShoppingCart basketTwo = new ShoppingCart();
+        ShoppingCart<Device> basketOne = new ShoppingCart<>();
+        ShoppingCart<Device> basketTwo = new ShoppingCart<>();
 
         basketOne.add(devices.get(0));
         basketOne.add(devices.get(1));
@@ -53,7 +54,7 @@ public class Main {
         basketTwo.add(devices.get(4));
 
         /** create two orders */
-        Orders orders = new Orders();
+        Orders<Order> orders = new Orders<>();
         orders.makePurchase(basketOne, personOne);
         orders.makePurchase(basketTwo, personTwo);
 
