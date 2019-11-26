@@ -16,10 +16,8 @@ public class Order implements ICrudAction {
     protected ShoppingCart cart;
     /** Customer */
     protected Credentials customer;
-    /** Order status enum */
-    protected enum Status {AWAITING, PROCESSED };
     /** Order status enum value */
-    protected Status status;
+    protected OrderStatus status;
 
     public Calendar getCreateTime() {
         return createTime;
@@ -37,7 +35,7 @@ public class Order implements ICrudAction {
 
     /** Default constructor with no params */
     public Order() {
-        status = Status.AWAITING;
+        status = OrderStatus.AWAITING;
         id = UUID.randomUUID();
     }
 
@@ -46,7 +44,7 @@ public class Order implements ICrudAction {
         this.cart = cart;
         this.customer = customer;
         id = UUID.randomUUID();
-        status = Status.AWAITING;
+        status = OrderStatus.AWAITING;
         createTime = new GregorianCalendar();
     }
 
@@ -54,7 +52,7 @@ public class Order implements ICrudAction {
     public void create() {
         //cart.create();
         customer.create();
-        status = Status.AWAITING;
+        status = OrderStatus.AWAITING;
         createTime = new GregorianCalendar();
     }
 
@@ -114,7 +112,7 @@ public class Order implements ICrudAction {
      * @return true if status is PROCESSED
      */
     public boolean isProcessed() {
-        return status == Status.PROCESSED;
+        return status == OrderStatus.PROCESSED;
     }
 
     public ShoppingCart getCart() {
@@ -135,18 +133,18 @@ public class Order implements ICrudAction {
 
     public int setStatus(String status) {
         try {
-            this.status = Status.valueOf(status.toUpperCase());
+            this.status = OrderStatus.valueOf(status.toUpperCase());
         } catch (IllegalArgumentException e) {
-            this.status = Status.AWAITING;
+            this.status = OrderStatus.AWAITING;
             return 1;
         } catch (NullPointerException e) {
-            this.status = Status.AWAITING;
+            this.status = OrderStatus.AWAITING;
             return 2;
         }
         return 0;
     }
 
-    public Status getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 }
