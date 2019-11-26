@@ -24,5 +24,9 @@ public abstract class ACheck {
         ordersList = new Orders<>();
     }
 
-    public abstract Order process(Order purchase);
+    /**
+     * Process all collection of orders
+     * @return amount of processed orders
+     */
+    public abstract int process();
 }
