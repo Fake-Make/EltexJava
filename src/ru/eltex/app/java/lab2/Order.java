@@ -144,6 +144,10 @@ public class Order implements ICrudAction {
         return 0;
     }
 
+    public void setStatus(OrderStatus statement) {
+        status = statement;
+    }
+
     public OrderStatus getStatus() {
         return status;
     }
