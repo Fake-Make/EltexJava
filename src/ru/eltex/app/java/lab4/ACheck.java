@@ -14,7 +14,7 @@ public abstract class ACheck {
      * Checks orders' status and change it
      *
      * @param purchase required order to check status
-     * @return int value that represent result-statement of income purchase
+     * @return changed Order object
      */
-    public abstract int process(Order purchase);
+    public abstract Order process(Order purchase);
 }
