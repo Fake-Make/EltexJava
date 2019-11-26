@@ -16,5 +16,5 @@ public abstract class ACheck {
      * @param purchase required order to check status
      * @return int value that represent result-statement of income purchase
      */
-    public abstract int proccess(Order purchase);
+    public abstract int process(Order purchase);
 }
