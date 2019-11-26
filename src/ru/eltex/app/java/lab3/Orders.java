@@ -61,10 +61,11 @@ public class Orders<T extends Order> {
      *
      * @returns amount of removed orders
      */
-    public int removeExpiredElements() {
+    public int removeExpiredElements(boolean checkTime) {
         int wasRemoved = 0;
         for (T order : ordersList) {
-            if (order.isExpired() && order.isProcessed()) {
+            /** expired and processed OR just processed regarding checkTime-flag */
+            if (checkTime && order.isExpired() && order.isProcessed() || !checkTime && order.isProcessed()) {
                 this.remove(order);
                 wasRemoved++;
             }
