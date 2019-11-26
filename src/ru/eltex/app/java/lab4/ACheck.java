@@ -25,6 +25,23 @@ public abstract class ACheck {
     }
 
     /**
+     * Overloaded constructor
+     *
+     * @param orders object of Orders-class
+     */
+    public ACheck(Orders orders) {
+        ordersList = orders;
+    }
+
+    public Orders<Order> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(Orders orders) {
+        ordersList = orders;
+    }
+
+    /**
      * Process all collection of orders
      * @return amount of processed orders
      */
