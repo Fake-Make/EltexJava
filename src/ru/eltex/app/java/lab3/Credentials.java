@@ -13,6 +13,23 @@ import java.util.UUID;
 public class Credentials implements ICrudAction {
     /** Person ID */
     private UUID id;
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     /** Person properties */
     private String firstName, surName, secondName, email;
 
