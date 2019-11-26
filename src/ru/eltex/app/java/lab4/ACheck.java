@@ -1,6 +1,7 @@
 package ru.eltex.app.java.lab4;
 
-import ru.eltex.app.java.lab2.Order;
+import ru.eltex.app.java.lab3.Order;
+import ru.eltex.app.java.lab3.Orders;
 
 /**
  * ACheck class
@@ -16,5 +17,12 @@ public abstract class ACheck {
      * @param purchase required order to check status
      * @return changed Order object
      */
+
+    Orders<Order> ordersList;
+
+    public ACheck() {
+        ordersList = new Orders<>();
+    }
+
     public abstract Order process(Order purchase);
 }
