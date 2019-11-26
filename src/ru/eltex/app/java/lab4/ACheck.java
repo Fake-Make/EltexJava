@@ -18,7 +18,7 @@ public abstract class ACheck {
      * @return changed Order object
      */
 
-    Orders<Order> ordersList;
+    protected Orders<Order> ordersList;
 
     public ACheck() {
         ordersList = new Orders<>();
