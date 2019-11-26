@@ -1,5 +1,7 @@
 package ru.eltex.app.java.lab3;
 
+import ru.eltex.app.java.lab2.OrderStatus;
+
 import java.util.*;
 
 /**
@@ -68,6 +70,20 @@ public class Orders<T extends Order> {
             }
         }
         return wasRemoved;
+    }
+
+    public int processElements() {
+        int wasProcessed = 0;
+        for (T order : ordersList) {
+            if (order.getStatus() == OrderStatus.AWAITING) {
+                /** We'll remove real order and then add new order with changed status */
+                remove(order);
+                order.setStatus(OrderStatus.PROCESSED);
+                add(order);
+                wasProcessed++;
+            }
+        }
+        return wasProcessed;
     }
 
     /** Show all orders and their information */
