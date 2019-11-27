@@ -95,4 +95,8 @@ public class Orders<T extends Order> {
         }
         System.out.println();
     }
+
+    public int getOrdersAmount() {
+        return ordersList.size();
+    }
 }
