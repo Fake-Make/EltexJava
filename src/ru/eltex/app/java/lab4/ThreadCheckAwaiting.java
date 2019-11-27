@@ -1,20 +1,32 @@
 package ru.eltex.app.java.lab4;
 
+import ru.eltex.app.java.lab3.Order;
+import ru.eltex.app.java.lab3.Orders;
+
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ThreadCheckAwaiting extends Thread {
+public class ThreadCheckAwaiting extends ACheck {
     protected int runTimeout = 8, runTimeoutRange = runTimeout / 4;
+
+    public ThreadCheckAwaiting(Orders<Order> orderList) {
+        super(orderList);
+    }
+
+    @Override
+    public int process() {
+        return ordersList.processElements();
+    }
 
     @Override
     public void run() {
-        /** where to get collection of orders? */
-        ACheck checker = new CheckAwaiting();
         while (true) {
-            checker.process();
+            synchronized (ordersList) {
+                this.process();
+            }
             try {
                 sleep(100 * ThreadLocalRandom.current().nextInt(runTimeout - runTimeoutRange, runTimeout + runTimeoutRange));
             } catch (InterruptedException e) {
-                System.out.println("InterruptedException occurred at ThreadCheckAwaiting: " + e);
+                Thread.currentThread().interrupt();
             }
         }
     }
