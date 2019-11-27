@@ -3,19 +3,24 @@ package ru.eltex.app.java.lab4;
 import ru.eltex.app.java.factories.AFactory;
 import ru.eltex.app.java.factories.FactoryOrders;
 import ru.eltex.app.java.lab3.Order;
+import ru.eltex.app.java.lab3.Orders;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ThreadFactoryOrders extends Thread {
+    Orders<Order> ordersCollection;
     protected int runTimeout = 4, runTimeoutRange = runTimeout / 4;
 
-    public ThreadFactoryOrders() {
+    public ThreadFactoryOrders(Orders<Order> ordersCollection) {
         super();
+        this.ordersCollection = ordersCollection;
     }
 
-    public ThreadFactoryOrders(int runTimeout) {
+    public ThreadFactoryOrders(Orders<Order> ordersCollection, int runTimeout) {
         super();
+        this.ordersCollection = ordersCollection;
         this.runTimeout = runTimeout / 100;
+        runTimeoutRange = this.runTimeout / 4;
     }
 
     @Override
@@ -24,11 +29,14 @@ public class ThreadFactoryOrders extends Thread {
 
         while (true) {
             /** Where to put created orders? */
-            factoryOrders.produce();
+            synchronized (ordersCollection) {
+                ordersCollection.add(factoryOrders.produce());
+            }
+
             try {
                 sleep(100 * ThreadLocalRandom.current().nextInt(runTimeout - runTimeoutRange, runTimeout + runTimeoutRange));
             } catch (InterruptedException e) {
-                System.out.println("InterruptedException occurred at ThreadFactoryOrders: " + e);
+                Thread.currentThread().interrupt();
             }
         }
     }
