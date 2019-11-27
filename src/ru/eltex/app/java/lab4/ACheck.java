@@ -10,35 +10,11 @@ import ru.eltex.app.java.lab3.Orders;
  * @author Dmitry Nevada
  * @version 0.26.11.19
  */
-public abstract class ACheck {
-    /**
-     * Checks orders' status and change it
-     *
-     * @param purchase required order to check status
-     * @return changed Order object
-     */
-
+public abstract class ACheck extends Thread {
     protected Orders<Order> ordersList;
 
-    public ACheck() {
-        ordersList = new Orders<>();
-    }
-
-    /**
-     * Overloaded constructor
-     *
-     * @param orders object of Orders-class
-     */
-    public ACheck(Orders orders) {
-        ordersList = orders;
-    }
-
-    public Orders<Order> getOrdersList() {
-        return ordersList;
-    }
-
-    public void setOrdersList(Orders orders) {
-        ordersList = orders;
+    public ACheck(Orders<Order> ordersList) {
+        this.ordersList = ordersList;
     }
 
     /**
