@@ -62,28 +62,28 @@ public class Orders<T extends Order> {
      * @returns amount of removed orders
      */
     public int removeExpiredElements(boolean checkTime) {
-        int wasRemoved = 0;
+        List<T> toRemove = new ArrayList<>();
         for (T order : ordersList) {
             /** expired and processed OR just processed regarding checkTime-flag */
             if (checkTime && order.isExpired() && order.isProcessed() || !checkTime && order.isProcessed()) {
-                this.remove(order);
-                wasRemoved++;
+                toRemove.add(order);
             }
         }
-        return wasRemoved;
+        for (T order : toRemove) {
+            this.remove(order);
+        }
+        return toRemove.size();
     }
 
     public int processElements() {
         int wasProcessed = 0;
-        for (T order : ordersList) {
-            if (order.getStatus() == OrderStatus.AWAITING) {
-                /** We'll remove real order and then add new order with changed status */
-                remove(order);
-                order.setStatus(OrderStatus.PROCESSED);
-                add(order);
+        for (int i = 0; i < ordersList.size(); i++) {
+            if (OrderStatus.AWAITING == ordersList.get(i).getStatus()) {
+                ordersList.get(i).setStatus(OrderStatus.PROCESSED);
                 wasProcessed++;
             }
         }
+
         return wasProcessed;
     }
 
