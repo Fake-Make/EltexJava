@@ -31,6 +31,7 @@ public abstract class ACheck extends Thread {
         while (true) {
             synchronized (ordersList) {
                 process();
+                consoleSignal();
             }
             try {
                 sleep(ThreadLocalRandom.current().nextLong(runTimeout - runTimeoutRange, runTimeout + runTimeoutRange));
@@ -38,5 +39,9 @@ public abstract class ACheck extends Thread {
                 Thread.currentThread().interrupt();
             }
         }
+    }
+
+    public void consoleSignal() {
+        System.out.println(Thread.currentThread().getName() + ": " + getClass().getSimpleName() + " processed;");
     }
 }
