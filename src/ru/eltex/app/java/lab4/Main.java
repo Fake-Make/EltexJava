@@ -8,11 +8,11 @@ public class Main {
         Orders<Order> ordersCollection = new Orders<>();
 
         /** Creating and starting factory without param */
-        //Thread threadOrdersFactory1 = new ThreadFactoryOrders(ordersCollection);
-        //threadOrdersFactory1.start();
+        Thread threadOrdersFactory1 = new ThreadFactoryOrders(ordersCollection);
+        threadOrdersFactory1.start();
 
         /** Creating and starting factory with param */
-        Thread threadOrdersFactory2 = new ThreadFactoryOrders(ordersCollection, 5000);
+        Thread threadOrdersFactory2 = new ThreadFactoryOrders(ordersCollection, 200);
         threadOrdersFactory2.start();
 
         /** Creating and starting awaiting checker */
