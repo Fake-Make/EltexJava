@@ -34,7 +34,11 @@ public abstract class ACheck extends Thread {
                 consoleSignal();
             }
             try {
-                sleep(ThreadLocalRandom.current().nextLong(runTimeout - runTimeoutRange, runTimeout + runTimeoutRange));
+                long min = runTimeout - runTimeoutRange, max = runTimeout + runTimeoutRange;
+                min = 0 > min ? 0 : min;
+                max = 0 > max ? 1000 : max;
+
+                sleep(ThreadLocalRandom.current().nextLong(min, max));
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
