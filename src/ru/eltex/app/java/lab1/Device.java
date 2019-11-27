@@ -156,29 +156,15 @@ public abstract class Device implements ICrudAction {
             System.out.println("This device was deleted or not created");
             return;
         }
-        System.out.println(
-                null == name ? "Device name is not defined;" : "Device name: " + name
-        );
-        System.out.println(
-                null == model ? "Device model is not defined;" : "Device model: " + model
-        );
-        System.out.println(
-                null == factory ? "Device manufacturer is not defined;" : "Device manufacturer: " + factory
-        );
-        System.out.println(
-                null == os ? "Device OS is not defined;" : "Device OS: " + os
-        );
-        System.out.println(
-                0.0 == price ? "Device is free or price is not defined;" : "Device price: " + price
-        );
-        System.out.println(
-                "Device ID: " + id
-        );
+        System.out.format("%s %s %s (%s) [%s] for $%.2f\n", factory, name, model, os, id.toString(), price);
+    };
+
+    public static void showCount() {
         System.out.println(
                 0 == count ? "There is no devices;" :
                         "There is " + count + " device" + (1 == count ? ";" : "s;")
         );
-    };
+    }
 
     /**
      * Manual input of data

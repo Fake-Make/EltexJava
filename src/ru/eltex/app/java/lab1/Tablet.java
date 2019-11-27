@@ -94,7 +94,6 @@ public class Tablet extends Device {
     @Override
     public void read() {
         super.read();
-        System.out.println("Device video chip name: " + videoChip);
-        System.out.println("Device screen resolution: " + screenResolution);
+        System.out.println("Tablet with " + videoChip + " video-chip and " + screenResolution + " screen resolution;");
     }
 }

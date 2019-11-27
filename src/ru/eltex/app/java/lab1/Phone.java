@@ -119,6 +119,6 @@ public class Phone extends Device {
     @Override
     public void read() {
         super.read();
-        System.out.println("Device's form type: " + formTypes[formType]);
+        System.out.println("Phone with " + formTypes[formType] + " corpus;");
     }
 }

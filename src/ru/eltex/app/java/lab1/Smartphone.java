@@ -141,7 +141,6 @@ public class Smartphone extends Device {
     @Override
     public void read() {
         super.read();
-        System.out.println("Device's sim type: " + simTypes[simType]);
-        System.out.println("Device's sim count: " + simCount);
+        System.out.println("Smartphone with " + simCount + " sim-cards of " + simTypes[simType] + " type;");
     }
 }
