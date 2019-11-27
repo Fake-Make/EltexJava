@@ -79,6 +79,8 @@ public class Orders {
     public void showAllOrders() {
         for (Order order : ordersList) {
             order.read();
+            System.out.println();
         }
+        System.out.println();
     }
 }

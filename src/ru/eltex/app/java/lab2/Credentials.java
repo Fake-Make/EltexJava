@@ -47,19 +47,7 @@ public class Credentials implements ICrudAction {
 
     @Override
     public void read() {
-        System.out.println(
-                "Person ID: " + id + ";"
-        );
-        System.out.println(
-                "Person: " +
-                        (null == firstName ? "" : firstName + " ") +
-                        (null == surName ? "" : surName + " ") +
-                        (null == secondName ? "" : secondName) +
-                        ";"
-        );
-        System.out.println(
-                null == email ? "No e-mail;" : "E-mail: " + email + ";"
-        );
+        System.out.format("%s %s %s (%s) [%s]\n", firstName, secondName, surName, email, id.toString());
     }
 
     @Override
