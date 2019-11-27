@@ -91,6 +91,8 @@ public class Orders<T extends Order> {
     public void showAllOrders() {
         for (T order : ordersList) {
             order.read();
+            System.out.println();
         }
+        System.out.println();
     }
 }

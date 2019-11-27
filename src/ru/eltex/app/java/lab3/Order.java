@@ -63,13 +63,9 @@ public class Order implements ICrudAction {
 
     @Override
     public void read() {
-        System.out.println("Order ID:" + id);
-        System.out.println("Order status: " + status.toString());
-        System.out.println("Order created " + createTime.getTime());
-        System.out.println("Shopping cart:");
-        cart.showAll();
-        System.out.println("Customer:");
+        System.out.format("Order #%s (%s) from %s:\n", id.toString(), status.toString(), createTime.getTime().toString());
         customer.read();
+        cart.showAll();
     }
 
     @Override
