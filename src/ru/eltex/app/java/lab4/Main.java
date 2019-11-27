@@ -7,10 +7,12 @@ public class Main {
     public static void main(String[] args) {
         Orders<Order> ordersCollection = new Orders<>();
 
-        /** Creating and starting factories */
-        Thread threadOrdersFactory1 = new ThreadFactoryOrders(ordersCollection);
-        Thread threadOrdersFactory2 = new ThreadFactoryOrders(ordersCollection, 2000);
-        threadOrdersFactory1.start();
+        /** Creating and starting factory without param */
+        //Thread threadOrdersFactory1 = new ThreadFactoryOrders(ordersCollection);
+        //threadOrdersFactory1.start();
+
+        /** Creating and starting factory with param */
+        Thread threadOrdersFactory2 = new ThreadFactoryOrders(ordersCollection, 5000);
         threadOrdersFactory2.start();
 
         /** Creating and starting awaiting checker */
@@ -21,13 +23,12 @@ public class Main {
         Thread threadOrdersProcessedChecker = new ThreadCheckProcessed(ordersCollection);
          threadOrdersProcessedChecker.start();
 
-        System.out.println("Orders amount:");
         while (true) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
 
                 synchronized (ordersCollection) {
-                    System.out.print(ordersCollection.getOrdersAmount() + " ");
+                    System.out.println(ordersCollection.getOrdersAmount() + " orders;");
                     //ordersCollection.showAllOrders();
                 }
             } catch (InterruptedException e) {
