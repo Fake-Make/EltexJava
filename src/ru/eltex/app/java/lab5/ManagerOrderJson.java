@@ -1,14 +1,12 @@
 package ru.eltex.app.java.lab5;
 
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import ru.eltex.app.java.lab3.Order;
 import ru.eltex.app.java.lab3.Orders;
 
 import java.io.*;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -38,13 +36,13 @@ public class ManagerOrderJson<T extends Order> extends AManageOrder<T> {
                 outStream.write(gson.toJson(item).getBytes());
             }
         } catch (FileNotFoundException eFNF) {
-            System.out.println(eFNF);
+            eFNF.printStackTrace();
             return false;
         } catch (IOException eIO) {
-            System.out.println(eIO);
+            eIO.printStackTrace();
             return false;
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             return false;
         }
 
@@ -63,13 +61,13 @@ public class ManagerOrderJson<T extends Order> extends AManageOrder<T> {
                 readCollection.add(item);
             }
         } catch (FileNotFoundException eFNF) {
-            System.out.println(eFNF);
+            eFNF.printStackTrace();
             return null;
         } catch (IOException eIO) {
-            System.out.println(eIO);
+            eIO.printStackTrace();
             return null;
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             return null;
         }
         /**
@@ -92,13 +90,13 @@ public class ManagerOrderJson<T extends Order> extends AManageOrder<T> {
                 outStream.write(gson.toJson(item).getBytes());
             }
         } catch (FileNotFoundException eFNF) {
-            System.out.println(eFNF);
+            eFNF.printStackTrace();
             return null;
         } catch (IOException eIO) {
-            System.out.println(eIO);
+            eIO.printStackTrace();
             return null;
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             return null;
         }
         return ordersCollection;

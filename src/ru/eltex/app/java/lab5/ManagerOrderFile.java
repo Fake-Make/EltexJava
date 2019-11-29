@@ -4,6 +4,7 @@ import ru.eltex.app.java.lab3.Order;
 import ru.eltex.app.java.lab3.Orders;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,13 +31,13 @@ public class ManagerOrderFile<T extends Order> extends AManageOrder<T>{
                 outStream.writeObject(item);
             }
         } catch (FileNotFoundException eFNF) {
-            System.out.println(eFNF);
+            eFNF.printStackTrace();
             return false;
         } catch (IOException eIO) {
-            System.out.println(eIO);
+            eIO.printStackTrace();
             return false;
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             return false;
         }
 
@@ -55,10 +56,10 @@ public class ManagerOrderFile<T extends Order> extends AManageOrder<T>{
             System.out.println(eFNF);
             return null;
         } catch (IOException eIO) {
-            System.out.println(eIO);
+            eIO.printStackTrace();
             return null;
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             return null;
         }
         /**
@@ -68,7 +69,7 @@ public class ManagerOrderFile<T extends Order> extends AManageOrder<T>{
          */
         ordersCollection = readCollection;
 
-        return readCollection;
+        return ordersCollection;
     }
 
     @Override
@@ -79,13 +80,13 @@ public class ManagerOrderFile<T extends Order> extends AManageOrder<T>{
                 outStream.writeObject(item);
             }
         } catch (FileNotFoundException eFNF) {
-            System.out.println(eFNF);
+            eFNF.printStackTrace();
             return null;
         } catch (IOException eIO) {
-            System.out.println(eIO);
+            eIO.printStackTrace();
             return null;
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             return null;
         }
         return ordersCollection;
