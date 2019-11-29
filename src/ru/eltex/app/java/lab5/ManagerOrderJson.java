@@ -59,10 +59,9 @@ public class ManagerOrderJson<T extends Order> extends AManageOrder<T> {
         try (FileOutputStream outStream = new FileOutputStream(fileNameToSave)) {
             List<T> actualOrdersList = ordersCollection.getOrdersList();
             Gson gson = new Gson();
-            byte[] buffer;
+
             for (T item : actualOrdersList) {
-                buffer = ((String) gson.toJson(item)).getBytes();
-                outStream.write(buffer);
+                outStream.write(gson.toJson(item).getBytes());
             }
         } catch (FileNotFoundException eFNF) {
             System.out.println(eFNF);
