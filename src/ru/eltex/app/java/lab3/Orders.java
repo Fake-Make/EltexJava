@@ -53,7 +53,7 @@ public class Orders<T extends Order> {
      */
     public T searchById(UUID id) {
         for (T item : ordersList) {
-            if (id == item.getId())
+            if (id.equals(item.getId()))
                 return item;
         }
         return null;
@@ -66,7 +66,7 @@ public class Orders<T extends Order> {
      */
     public boolean contains(UUID id) {
         for (T item : ordersList) {
-            if (id == item.getId())
+            if (id.equals(item.getId()))
                 return true;
         }
         return false;
