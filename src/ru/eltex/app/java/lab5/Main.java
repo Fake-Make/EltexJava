@@ -6,79 +6,80 @@ import ru.eltex.app.java.lab3.Orders;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) {
-        String commonFile = "commonFile", jsonFile = "jsonFile";
+        boolean inJson = 0 < args.length && !args[0].isEmpty();
+
+        String file = inJson ? "jsonFile" : "commonFile";
+
         try {
-            Files.deleteIfExists(Path.of(commonFile));
-            Files.deleteIfExists(Path.of(jsonFile));
+            Files.deleteIfExists(Path.of(file));
         } catch (Exception e) {
             // whatever
         }
 
         /** Init variables */
         Orders<Order> ordersCollection = new Orders<>();
-        Orders<Order> ordersCollectionAfter = new Orders<>();
         FactoryOrders<Order> factoryOrders = new FactoryOrders<>();
 
         /** Init managers */
-        AManageOrder commonFileSaver = new ManagerOrderFile(ordersCollection, commonFile);
-        AManageOrder commonFileReader = new ManagerOrderFile(ordersCollectionAfter, commonFile);
-        AManageOrder jsonFileSaver = new ManagerOrderJson(ordersCollection, jsonFile);
-        AManageOrder jsonFileReader = new ManagerOrderJson(ordersCollectionAfter, jsonFile);
+        AManageOrder fileHandler = inJson ?
+                new ManagerOrderJson(ordersCollection, file) :
+                new ManagerOrderFile(ordersCollection, file);
 
         /** Produce orders */
         ordersCollection.add(factoryOrders.produce());
         ordersCollection.add(factoryOrders.produce());
-        ordersCollection.add(factoryOrders.produce());
 
-        /** Save files */
-        commonFileSaver.saveAll();
-        jsonFileSaver.saveAll();
+        /** See collection */
+        ordersCollection.showAllOrders();
 
-        /** Load common file */
-        commonFileReader.readAll();
-
-        /** See changes */
-        ordersCollectionAfter.showAllOrders();
+        /** Save collection to file */
+        fileHandler.saveAll();
 
         /** Add new element */
         Order tmp = factoryOrders.produce();
-        System.out.println();
-        System.out.println("new ID:" + tmp.getId());
-        ordersCollectionAfter.add(tmp);
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите ID для сохранения в файл");
-        UUID id = UUID.fromString(scanner.nextLine());
+        ordersCollection.add(tmp);
+        UUID id = tmp.getId();
+        System.out.println("Added order's ID:" + id);
 
         /** Save it to file */
-        commonFileReader.saveById(id, false);
+        fileHandler.saveById(id, false);
 
         /** See changes */
         System.out.println("ITEM ADDED");
-        ordersCollectionAfter.showAllOrders();
+        ordersCollection.showAllOrders();
 
         /** Remove existing element */
-        ordersCollectionAfter.removeById(id);
+        ordersCollection.removeById(id);
 
         /** See changes */
         System.out.println("ITEM REMOVED");
-        ordersCollectionAfter.showAllOrders();
+        ordersCollection.showAllOrders();
 
         /** Load it back from file */
-        commonFileReader.readById(id, false);
+        fileHandler.readById(id, false);
 
         /** See changes */
-        System.out.println("ITEM GOT BACK");
-        ordersCollectionAfter.showAllOrders();
+        System.out.println("ITEM RESTORED");
+        ordersCollection.showAllOrders();
 
-        /** Load json file */
-        //jsonFileReader.readAll();
+        /** Clear all collection */
+        ordersCollection.setOrdersList(new ArrayList<>());
 
         /** See changes */
-        //ordersCollectionAfter.showAllOrders();
+        System.out.println("COLLECTION CLEARED");
+        ordersCollection.showAllOrders();
+
+        /** Restore it */
+        fileHandler.readAll();
+
+        /** See changes */
+        System.out.println("COLLECTION RESTORED");
+        ordersCollection.showAllOrders();
     }
 }
