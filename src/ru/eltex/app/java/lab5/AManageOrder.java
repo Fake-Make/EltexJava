@@ -7,7 +7,20 @@ import java.util.UUID;
 
 public abstract class AManageOrder<T extends Order> implements IOrder<T> {
     protected Orders<T> ordersCollection;
-    protected String fileNameToSave = "io.file";
+    protected String fileNameToSave;
+
+    public AManageOrder(Orders<T> ordersCollection, String fileName) {
+        this.ordersCollection = ordersCollection;
+        this.fileNameToSave = fileName;
+    }
+
+    public String getFileNameToSave() {
+        return fileNameToSave;
+    }
+
+    public void setFileNameToSave(String fileNameToSave) {
+        this.fileNameToSave = fileNameToSave;
+    }
 
     @Override
     public boolean readById(UUID id, boolean toRewrite) {
