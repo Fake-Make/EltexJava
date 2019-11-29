@@ -11,29 +11,23 @@ public abstract class AManageOrder<T extends Order> implements IOrder<T> {
 
     @Override
     public boolean readById(UUID id, boolean toRewrite) {
-        /**
-         * TODO:
-         * Orders.searchById()
-         * Orders.containsById()
-         * Orders.removeById()
-         */
+        boolean alreadyExists = ordersCollection.contains(id);
 
-        /**
-         * if ( !toRewrite && orderCollection.containsById(id) )
-         *      return false;
-         * Orders<T> tmp = readAll();
-         * if (tmp.containById(id)) {
-         *      if ( orderCollection.containsById(id) ) {
-         *          // replace
-         *          orderCollection.removeById(id);
-         *          orderCollection.add(tmp.searchById(id));
-         *      } else {
-         *          // add
-         *          orderCollection.add(tmp.searchById(id));
-         *      }
-         *      return true;
-         * }
-         */
+        if ( !toRewrite && alreadyExists )
+            return false;
+
+        T itemFromFile = readAll().searchById(id);
+        if (null != itemFromFile) {
+            if (alreadyExists) {
+                // Replace
+                ordersCollection.removeById(id);
+                ordersCollection.add(itemFromFile);
+            } else {
+                // Add
+                ordersCollection.add(itemFromFile);
+            }
+            return true;
+        }
         return false;
     }
 }
