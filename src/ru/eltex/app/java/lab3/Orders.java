@@ -45,6 +45,9 @@ public class Orders<T extends Order> implements Serializable {
     public List<T> getOrdersList() {
         return ordersList;
     }
+    public void setOrdersList(List<T> ordersList) {
+        this.ordersList = ordersList;
+    }
 
     /**
      * Removing item from orders list
