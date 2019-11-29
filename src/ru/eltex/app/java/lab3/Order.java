@@ -24,6 +24,10 @@ public class Order implements ICrudAction {
         return createTime;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     /** Creating order date */
     protected Calendar createTime;
 
