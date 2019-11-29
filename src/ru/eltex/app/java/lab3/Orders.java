@@ -41,6 +41,10 @@ public class Orders<T extends Order> {
         add(order);
     }
 
+    public List<T> getOrdersList() {
+        return ordersList;
+    }
+
     /**
      * Removing item from orders list
      *
