@@ -73,6 +73,21 @@ public class ManagerOrderFile<T extends Order> extends AManageOrder<T>{
 
     @Override
     public Orders<T> saveAll() {
-        return null;
+        try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(fileNameToSave))) {
+            List<T> actualOrdersList = ordersCollection.getOrdersList();
+            for (T item : actualOrdersList) {
+                outStream.writeObject(item);
+            }
+        } catch (FileNotFoundException eFNF) {
+            System.out.println(eFNF);
+            return null;
+        } catch (IOException eIO) {
+            System.out.println(eIO);
+            return null;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+        return ordersCollection;
     }
 }
