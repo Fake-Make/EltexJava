@@ -11,28 +11,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ManagerOrderJson<T extends Order> extends AManageOrder<T> {
-    public ManagerOrderJson(Orders<T> ordersCollection, String fileName) {
+public class ManagerOrderJson extends AManageOrder {
+    public ManagerOrderJson(Orders<Order> ordersCollection, String fileName) {
         super(ordersCollection, fileName);
     }
 
     @Override
     public boolean saveById(UUID id, boolean toRewrite) {
-        T itemToSave = ordersCollection.searchById(id);
+        Order itemToSave = ordersCollection.searchById(id);
 
         if (null == itemToSave)
             return false;
 
-        Orders<T> readCollection = readAll();
+        Orders<Order> readCollection = readAll();
         if (!toRewrite && readCollection.contains(id))
             return false;
 
         readCollection.replace(itemToSave);
         try (FileOutputStream outStream = new FileOutputStream(fileNameToSave)) {
-            List<T> ordersToSave = readCollection.getOrdersList();
+            List<Order> ordersToSave = readCollection.getOrdersList();
             Gson gson = new Gson();
 
-            for (T item : ordersToSave) {
+            for (Order item : ordersToSave) {
                 outStream.write(gson.toJson(item).getBytes());
             }
         } catch (FileNotFoundException eFNF) {
@@ -50,8 +50,8 @@ public class ManagerOrderJson<T extends Order> extends AManageOrder<T> {
     }
 
     @Override
-    public Orders<T> readAll() {
-        ArrayList<T> readList;
+    public Orders<Order> readAll() {
+        ArrayList<Order> readList = new ArrayList<>();
 
         try (JsonReader inStream = new JsonReader(new FileReader(fileNameToSave))) {
             Gson gson = new Gson();

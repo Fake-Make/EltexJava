@@ -5,7 +5,7 @@ import ru.eltex.app.java.lab3.Orders;
 
 import java.util.UUID;
 
-public interface IOrder<T extends Order> {
+public interface IOrder {
     /**
      * Read T-object from file and save it to collection
      *
@@ -22,10 +22,10 @@ public interface IOrder<T extends Order> {
      * Reads all T-objects from file and push it to collection
      * @return collection read from file
      */
-    Orders<T> readAll();
+    Orders<Order> readAll();
     /**
      * Reads all T-objects from collection and save it to file
      * @return saved collection
      */
-    Orders<T> saveAll();
+    Orders<Order> saveAll();
 }

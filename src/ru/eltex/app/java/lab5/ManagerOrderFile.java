@@ -8,26 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ManagerOrderFile<T extends Order> extends AManageOrder<T>{
-    public ManagerOrderFile(Orders<T> ordersCollection, String fileName) {
+public class ManagerOrderFile extends AManageOrder {
+    public ManagerOrderFile(Orders<Order> ordersCollection, String fileName) {
         super(ordersCollection, fileName);
     }
 
     @Override
     public boolean saveById(UUID id, boolean toRewrite) {
-        T itemToSave = ordersCollection.searchById(id);
+        Order itemToSave = ordersCollection.searchById(id);
 
         if (null == itemToSave)
             return false;
 
-        Orders<T> readCollection = readAll();
+        Orders<Order> readCollection = readAll();
         if (!toRewrite && readCollection.contains(id))
             return false;
 
         readCollection.replace(itemToSave);
         try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(fileNameToSave))) {
-            List<T> ordersToSave = readCollection.getOrdersList();
-            for (T item : ordersToSave) {
+            List<Order> ordersToSave = readCollection.getOrdersList();
+            for (Order item : ordersToSave) {
                 outStream.writeObject(item);
             }
         } catch (FileNotFoundException eFNF) {
@@ -45,10 +45,10 @@ public class ManagerOrderFile<T extends Order> extends AManageOrder<T>{
     }
 
     @Override
-    public Orders<T> readAll() {
-        List<T> readCollection = new ArrayList<>();
+    public Orders<Order> readAll() {
+        List<Order> readCollection = new ArrayList<>();
         try (ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(fileNameToSave))) {
-            while (readCollection.add((T) inStream.readObject()));
+            while (readCollection.add((Order) inStream.readObject()));
         } catch (EOFException eEOF) {
             // this is fine
         }
@@ -73,10 +73,10 @@ public class ManagerOrderFile<T extends Order> extends AManageOrder<T>{
     }
 
     @Override
-    public Orders<T> saveAll() {
+    public Orders<Order> saveAll() {
         try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(fileNameToSave))) {
-            List<T> actualOrdersList = ordersCollection.getOrdersList();
-            for (T item : actualOrdersList) {
+            List<Order> actualOrdersList = ordersCollection.getOrdersList();
+            for (Order item : actualOrdersList) {
                 outStream.writeObject(item);
             }
         } catch (FileNotFoundException eFNF) {

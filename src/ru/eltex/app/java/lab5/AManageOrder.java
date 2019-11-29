@@ -5,11 +5,11 @@ import ru.eltex.app.java.lab3.Orders;
 
 import java.util.UUID;
 
-public abstract class AManageOrder<T extends Order> implements IOrder<T> {
-    protected Orders<T> ordersCollection;
+public abstract class AManageOrder implements IOrder {
+    protected Orders<Order> ordersCollection;
     protected String fileNameToSave;
 
-    public AManageOrder(Orders<T> ordersCollection, String fileName) {
+    public AManageOrder(Orders<Order> ordersCollection, String fileName) {
         this.ordersCollection = ordersCollection;
         this.fileNameToSave = fileName;
     }
@@ -29,7 +29,7 @@ public abstract class AManageOrder<T extends Order> implements IOrder<T> {
         if ( !toRewrite && alreadyExists )
             return false;
 
-        T itemFromFile = readAll().searchById(id);
+        Order itemFromFile = readAll().searchById(id);
         if (null != itemFromFile) {
             if (alreadyExists)
                 ordersCollection.replace(itemFromFile);
