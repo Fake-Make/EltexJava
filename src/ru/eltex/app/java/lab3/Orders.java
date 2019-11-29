@@ -27,9 +27,12 @@ public class Orders<T extends Order> {
      *
      * @param order Object of Order-type
      */
-    public void add(T order) {
+    public boolean add(T order) {
+        if(contains(order.getId()))
+            return false;
         ordersList.add(order);
         ordersListByCreateTime.put(order.getCreateTime(), order);
+        return true;
     }
 
     /**
