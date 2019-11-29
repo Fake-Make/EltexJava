@@ -35,6 +35,12 @@ public class Orders<T extends Order> {
         return true;
     }
 
+    public void replace(T order) {
+        if (contains(order.getId()))
+            remove(searchById(order.getId()));
+        add(order);
+    }
+
     /**
      * Removing item from orders list
      *
