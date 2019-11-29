@@ -45,7 +45,30 @@ public class ManagerOrderFile<T extends Order> extends AManageOrder<T>{
 
     @Override
     public Orders<T> readAll() {
-        return null;
+        Orders<T> readCollection = new Orders<>();
+        try (ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(fileNameToSave))) {
+            T tempObject;
+            while(null != (tempObject = (T) inStream.readObject())) {
+                readCollection.add(tempObject);
+            }
+        } catch (FileNotFoundException eFNF) {
+            System.out.println(eFNF);
+            return null;
+        } catch (IOException eIO) {
+            System.out.println(eIO);
+            return null;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+        /**
+         * NOTE: We replace whole existing collection
+         * with collection that we just read.
+         * Probably bad solution, but it depends of what we need.
+         */
+        ordersCollection = readCollection;
+
+        return readCollection;
     }
 
     @Override
