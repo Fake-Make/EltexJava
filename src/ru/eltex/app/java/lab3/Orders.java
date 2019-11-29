@@ -47,6 +47,41 @@ public class Orders<T extends Order> {
     }
 
     /**
+     * Search T in orderList<T> by its id
+     * @param id for searching by
+     * @return T or NULL
+     */
+    public T searchById(UUID id) {
+        for (T item : ordersList) {
+            if (id == item.getId())
+                return item;
+        }
+        return null;
+    }
+
+    /**
+     * Check if orderList<T> contains an item by its id
+     * @param id for searching by
+     * @return true if T with id is in orderList, false otherwise
+     */
+    public boolean contains(UUID id) {
+        for (T item : ordersList) {
+            if (id == item.getId())
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Remove T from orderList by its id
+     * @param id for searching by
+     * @return true if item was found and removed, false otherwise
+     */
+    public boolean removeById(UUID id) {
+        return 0 == remove(searchById(id)) ? true : false;
+    }
+
+    /**
      * Creating order and pushing it to container
      *
      * @param cart ShoppingCart-typed object for creating order
