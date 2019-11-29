@@ -46,7 +46,11 @@ public class Orders<T extends Order> implements Serializable {
         return ordersList;
     }
     public void setOrdersList(List<T> ordersList) {
-        this.ordersList = ordersList;
+        this.ordersList.clear();
+        this.ordersListByCreateTime.clear();
+        for (T item : ordersList) {
+            add(item);
+        }
     }
 
     /**
