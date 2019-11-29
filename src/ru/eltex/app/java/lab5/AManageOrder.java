@@ -31,14 +31,10 @@ public abstract class AManageOrder<T extends Order> implements IOrder<T> {
 
         T itemFromFile = readAll().searchById(id);
         if (null != itemFromFile) {
-            if (alreadyExists) {
-                // Replace
-                ordersCollection.removeById(id);
+            if (alreadyExists)
+                ordersCollection.replace(itemFromFile);
+            else
                 ordersCollection.add(itemFromFile);
-            } else {
-                // Add
-                ordersCollection.add(itemFromFile);
-            }
             return true;
         }
         return false;
