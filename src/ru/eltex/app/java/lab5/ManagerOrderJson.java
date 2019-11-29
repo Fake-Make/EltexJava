@@ -6,9 +6,8 @@ import ru.eltex.app.java.lab3.Orders;
 import java.util.UUID;
 
 public class ManagerOrderJson<T extends Order> extends AManageOrder<T> {
-    @Override
-    public boolean readById(UUID id, boolean toRewrite) {
-        return super.readById(id, toRewrite);
+    public ManagerOrderJson(Orders<T> ordersCollection, String fileName) {
+        super(ordersCollection, fileName);
     }
 
     @Override
