@@ -51,15 +51,12 @@ public class ManagerOrderJson<T extends Order> extends AManageOrder<T> {
 
     @Override
     public Orders<T> readAll() {
-        Orders<T> readCollection = new Orders<>();
+        ArrayList<T> readList;
 
         try (JsonReader inStream = new JsonReader(new FileReader(fileNameToSave))) {
             Gson gson = new Gson();
             /** The dark side of Java: reflection **/
-            ArrayList<T> readList = gson.fromJson(inStream, ((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
-            for (T item : readList) {
-                readCollection.add(item);
-            }
+            readList = gson.fromJson(inStream, ((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
         } catch (FileNotFoundException eFNF) {
             eFNF.printStackTrace();
             return null;
@@ -75,9 +72,9 @@ public class ManagerOrderJson<T extends Order> extends AManageOrder<T> {
          * with collection that we just read.
          * Probably bad solution, but it depends of what we need.
          */
-        ordersCollection = readCollection;
+        ordersCollection.setOrdersList(readList);
 
-        return readCollection;
+        return ordersCollection;
     }
 
     @Override

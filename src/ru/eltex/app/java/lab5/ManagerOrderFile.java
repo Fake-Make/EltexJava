@@ -46,14 +46,14 @@ public class ManagerOrderFile<T extends Order> extends AManageOrder<T>{
 
     @Override
     public Orders<T> readAll() {
-        Orders<T> readCollection = new Orders<>();
+        List<T> readCollection = new ArrayList<>();
         try (ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(fileNameToSave))) {
-            T tempObject;
-            while(null != (tempObject = (T) inStream.readObject())) {
-                readCollection.add(tempObject);
-            }
-        } catch (FileNotFoundException eFNF) {
-            System.out.println(eFNF);
+            while (readCollection.add((T) inStream.readObject()));
+        } catch (EOFException eEOF) {
+            // this is fine
+        }
+        catch (FileNotFoundException eFNF) {
+            eFNF.printStackTrace();
             return null;
         } catch (IOException eIO) {
             eIO.printStackTrace();
@@ -67,7 +67,7 @@ public class ManagerOrderFile<T extends Order> extends AManageOrder<T>{
          * with collection that we just read.
          * Probably bad solution, but it depends of what we need.
          */
-        ordersCollection = readCollection;
+        ordersCollection.setOrdersList(readCollection);
 
         return ordersCollection;
     }
