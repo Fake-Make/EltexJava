@@ -14,7 +14,33 @@ public class ManagerOrderFile<T extends Order> extends AManageOrder<T>{
 
     @Override
     public boolean saveById(UUID id, boolean toRewrite) {
-        return false;
+        T itemToSave = ordersCollection.searchById(id);
+
+        if (null == itemToSave)
+            return false;
+
+        Orders<T> readCollection = readAll();
+        if (!toRewrite && readCollection.contains(id))
+            return false;
+
+        readCollection.replace(itemToSave);
+        try (ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream(fileNameToSave))) {
+            List<T> ordersToSave = readCollection.getOrdersList();
+            for (T item : ordersToSave) {
+                outStream.writeObject(item);
+            }
+        } catch (FileNotFoundException eFNF) {
+            System.out.println(eFNF);
+            return false;
+        } catch (IOException eIO) {
+            System.out.println(eIO);
+            return false;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+
+        return true;
     }
 
     @Override
