@@ -20,7 +20,35 @@ public class ManagerOrderJson<T extends Order> extends AManageOrder<T> {
 
     @Override
     public boolean saveById(UUID id, boolean toRewrite) {
-        return false;
+        T itemToSave = ordersCollection.searchById(id);
+
+        if (null == itemToSave)
+            return false;
+
+        Orders<T> readCollection = readAll();
+        if (!toRewrite && readCollection.contains(id))
+            return false;
+
+        readCollection.replace(itemToSave);
+        try (FileOutputStream outStream = new FileOutputStream(fileNameToSave)) {
+            List<T> ordersToSave = readCollection.getOrdersList();
+            Gson gson = new Gson();
+
+            for (T item : ordersToSave) {
+                outStream.write(gson.toJson(item).getBytes());
+            }
+        } catch (FileNotFoundException eFNF) {
+            System.out.println(eFNF);
+            return false;
+        } catch (IOException eIO) {
+            System.out.println(eIO);
+            return false;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+
+        return true;
     }
 
     @Override
