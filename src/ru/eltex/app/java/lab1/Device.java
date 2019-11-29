@@ -1,4 +1,5 @@
 package ru.eltex.app.java.lab1;
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -8,7 +9,7 @@ import java.util.UUID;
  * @author Dmitry Nevada
  * @version 1.20.09.19
  */
-public abstract class Device implements ICrudAction {
+public abstract class Device implements ICrudAction, Serializable {
     /**
      * Device Name,
      * Device Producer,

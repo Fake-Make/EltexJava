@@ -2,6 +2,7 @@ package ru.eltex.app.java.lab3;
 
 import ru.eltex.app.java.lab2.OrderStatus;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -10,7 +11,7 @@ import java.util.*;
  * @author Dmitry Nevada
  * @version 1.19.11.19
  */
-public class Orders<T extends Order> {
+public class Orders<T extends Order> implements Serializable {
     /** Basic container for Order-typed objects */
     protected List<T> ordersList;
     /** Secondary container for Order-typed objects by their creating time */

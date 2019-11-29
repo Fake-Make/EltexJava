@@ -3,6 +3,7 @@ package ru.eltex.app.java.lab3;
 import ru.eltex.app.java.lab1.ICrudAction;
 import ru.eltex.app.java.lab2.OrderStatus;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -12,7 +13,7 @@ import java.util.*;
  * @author Dmitry Nevada
  * @version 1.19.11.19
  */
-public class Order implements ICrudAction {
+public class Order implements ICrudAction, Serializable {
     /** Cart of ordered items */
     protected ShoppingCart cart;
     /** Customer */

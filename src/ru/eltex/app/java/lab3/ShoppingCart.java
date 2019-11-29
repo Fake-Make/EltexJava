@@ -2,6 +2,7 @@ package ru.eltex.app.java.lab3;
 
 import ru.eltex.app.java.lab1.Device;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -10,7 +11,7 @@ import java.util.*;
  * @author Dmitry Nevada
  * @version 1.23.11.19
  */
-public class ShoppingCart<T extends Device> {
+public class ShoppingCart<T extends Device> implements Serializable {
     /** Basic container for Device-typed objects */
     protected List<T> cartList;
     /** Additional container for device-items' IDs */

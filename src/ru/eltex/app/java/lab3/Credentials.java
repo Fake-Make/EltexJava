@@ -1,6 +1,7 @@
 package ru.eltex.app.java.lab3;
 import ru.eltex.app.java.lab1.ICrudAction;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -10,7 +11,7 @@ import java.util.UUID;
  * @author Dmitry Nevada
  * @version 1.21.11.19
  */
-public class Credentials implements ICrudAction {
+public class Credentials implements ICrudAction, Serializable {
     /** Person ID */
     private UUID id;
 
