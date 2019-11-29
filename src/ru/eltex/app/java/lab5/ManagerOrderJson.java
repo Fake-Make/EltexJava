@@ -1,12 +1,10 @@
 package ru.eltex.app.java.lab5;
 
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
 import ru.eltex.app.java.lab3.Order;
 import ru.eltex.app.java.lab3.Orders;
 
 import java.io.*;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -53,10 +51,11 @@ public class ManagerOrderJson extends AManageOrder {
     public Orders<Order> readAll() {
         ArrayList<Order> readList = new ArrayList<>();
 
-        try (JsonReader inStream = new JsonReader(new FileReader(fileNameToSave))) {
+        try (ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(fileNameToSave))) {
             Gson gson = new Gson();
-            /** The dark side of Java: reflection **/
-            readList = gson.fromJson(inStream, ((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
+            while (readList.add((Order) gson.fromJson((String) inStream.readObject(), Order.class)));
+        } catch (EOFException eEOF) {
+            // this is fine
         } catch (FileNotFoundException eFNF) {
             eFNF.printStackTrace();
             return null;
@@ -67,24 +66,19 @@ public class ManagerOrderJson extends AManageOrder {
             e.printStackTrace();
             return null;
         }
-        /**
-         * NOTE: We replace whole existing collection
-         * with collection that we just read.
-         * Probably bad solution, but it depends of what we need.
-         */
         ordersCollection.setOrdersList(readList);
 
         return ordersCollection;
     }
 
     @Override
-    public Orders<T> saveAll() {
-        try (FileOutputStream outStream = new FileOutputStream(fileNameToSave)) {
-            List<T> actualOrdersList = ordersCollection.getOrdersList();
+    public Orders<Order> saveAll() {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileNameToSave))) {
+            List<Order> actualOrdersList = ordersCollection.getOrdersList();
             Gson gson = new Gson();
 
-            for (T item : actualOrdersList) {
-                outStream.write(gson.toJson(item).getBytes());
+            for (Order item : actualOrdersList) {
+                outputStream.writeObject(gson.toJson(item, Order.class));
             }
         } catch (FileNotFoundException eFNF) {
             eFNF.printStackTrace();
