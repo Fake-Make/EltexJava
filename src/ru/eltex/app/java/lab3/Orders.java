@@ -59,10 +59,10 @@ public class Orders<T extends Order> implements Serializable {
      * @param order Object of Order-type
      */
     public int remove(T order) {
-        ordersListByCreateTime.remove(order.getCreateTime());
         int index = ordersList.indexOf(order);
         if (-1 == index)
             return 1;
+        ordersListByCreateTime.remove(order.getCreateTime());
         ordersList.remove(index);
         return 0;
     }
